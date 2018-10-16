@@ -26,9 +26,11 @@ public class User extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1 ;
 
 	/**
-	 * Launch the application.
+	 * Launch the application
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -77,49 +79,85 @@ public class User extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Square[m^2]", "Square kilomiter[km^2]", "Square centimiter[cm^2]", "Square milimiter[mm^2]", "Square micromiter[\u03BCm^2]"}));
-	    comboBox.addItemListener(new ItemListener(){
-	    	public void OnItemSelected(ActionEvent e) {
-	    		float a=Float.parseFloat(textField .getText());
-	    	}
-
-			@Override
-			public void itemStateChanged(ItemEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-	    });
-		comboBox.setBounds(257, 96, 150, 22);
-		contentPane.add(comboBox);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Square[m^2]", "Square kilomiter[km^2]", "Square centimiter[cm^2]", "Square milimiter[mm^2]", "Square micromiter[\u03BCm^2]", ""}));
-		comboBox_1.setBounds(36, 97, 150, 22);
+		comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Square[m^2]", "Square kilomiter[km^2]", "Square centimiter[cm^2]", "Square milimiter[mm^2]"}));
+		comboBox_1.setBounds(257, 96, 150, 22);
 		contentPane.add(comboBox_1);
 		comboBox_1.addItemListener(new ItemListener() {
 
 			@Override
-			public void itemStateChanged(ItemEvent arg0) {
+			public void itemStateChanged(ItemEvent e) {
 				double a ,c =0;
 				a=Double.valueOf(textField.getText());
 				try {
+					//no 0 point in index
 					if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==0)
 					{
 						 c=a;
 					}
 					if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==1)
 					{
-						c=a/10;
+						c=a*0.000001;
 					}
 					if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==2)
 					{
-						c=a/100;
+						c=a*10000;
 					}
 					if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==3)
 					{
-						c=a/1000;
-					}
+						c=a*1000000;
+					}  
+						//no 1 point in index
+					if(comboBox.getSelectedIndex()==1 && comboBox_1.getSelectedIndex()==0)
+							{
+								 c=a*1000000;
+							}
+							if(comboBox.getSelectedIndex()==1 && comboBox_1.getSelectedIndex()==1)
+							{
+								c=a;
+							}
+							if(comboBox.getSelectedIndex()==1 && comboBox_1.getSelectedIndex()==2)
+							{
+								c=a*1000000*10000;
+							}
+							if(comboBox.getSelectedIndex()==1 && comboBox_1.getSelectedIndex()==3)
+							{
+								c=a*1000000*100000;
+								}
+								 // no 2 point in index
+							        	if(comboBox.getSelectedIndex()==2 && comboBox_1.getSelectedIndex()==0)
+										{
+											 c=a*0.0001;
+										}
+										if(comboBox.getSelectedIndex()==2 && comboBox_1.getSelectedIndex()==1)
+										{
+											c=a*1.E-10;
+										}
+										if(comboBox.getSelectedIndex()==2 && comboBox_1.getSelectedIndex()==2)
+										{
+											c=a;
+										}
+										if(comboBox.getSelectedIndex()==2 && comboBox_1.getSelectedIndex()==3)
+										{
+											c=a*100;
+										}
+										//no 3 point in index
+												if(comboBox.getSelectedIndex()==3 && comboBox_1.getSelectedIndex()==0)
+												{
+													 c=a*0.000001;
+												}
+												if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==1)
+												{
+													c=a*1.E-12;
+												}
+												if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==2)
+												{
+													c=a*0.01;
+												}
+												if(comboBox.getSelectedIndex()==0 && comboBox_1.getSelectedIndex()==3)
+												{
+													c=a;
+												}
 				
 				textField_1.setText(String.valueOf(c));
 				}
@@ -128,11 +166,13 @@ public class User extends JFrame {
 					e1.printStackTrace();
 				}
 			}
-			
-				
-			
-			
 		});
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Square[m^2]", "Square kilomiter[km^2]", "Square centimiter[cm^2]", "Square milimiter[mm^2]"}));
+		comboBox.setBounds(36, 97, 150, 22);
+		contentPane.add(comboBox);
+		
 	
 		textField_1 = new JTextField();
 		textField_1.setBounds(257, 130, 92, 20);
